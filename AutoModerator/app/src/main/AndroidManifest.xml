@@ -39,6 +39,8 @@
             android:name=".activity.CardDialogActivity"
             android:screenOrientation="landscape"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
+        <activity android:name=".activity.SettingsActivity"></activity>
+
     </application>
 
 </manifest>

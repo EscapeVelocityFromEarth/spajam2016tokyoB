@@ -36,6 +36,7 @@ public class VoiceAnalysisService extends Service {
     }
 
     private void startListener() {
+        L.outputMethodName();
         if (mSpeechRecognizer == null) {
             mSpeechRecognizer = SpeechRecognizer.createSpeechRecognizer(this);
             mSpeechRecognizer.setRecognitionListener(mRecognitionListener);
@@ -74,22 +75,9 @@ public class VoiceAnalysisService extends Service {
 
         private Boolean mIsListening = false;
 
-        private void setListeningFlag(boolean isListening) {
-            synchronized (mIsListening) {
-                mIsListening = isListening;
-            }
-        }
-
-        private boolean getListeningFlag() {
-            synchronized (mIsListening) {
-                return mIsListening;
-            }
-        }
-
         @Override
         public void onReadyForSpeech(Bundle bundle) {
             L.outputMethodName();
-            setListeningFlag(true);
         }
 
         @Override
@@ -117,16 +105,14 @@ public class VoiceAnalysisService extends Service {
 
         @Override
         public void onError(int i) {
-            if (!getListeningFlag()) {
-                return;
-            }
             L.outputMethodName();
             L.d("Error id = " + i);
             switch (i) {
                 case SpeechRecognizer.ERROR_NETWORK_TIMEOUT:
                 case SpeechRecognizer.ERROR_SPEECH_TIMEOUT:
-                case SpeechRecognizer.ERROR_NO_MATCH:
+                    mSpeechRecognizer.stopListening();
                     mSpeechRecognizer.cancel();
+                case SpeechRecognizer.ERROR_NO_MATCH:
                     startListener();
                     // もう一度トライ
                     break;
@@ -134,17 +120,21 @@ public class VoiceAnalysisService extends Service {
                 case SpeechRecognizer.ERROR_CLIENT:
                 case SpeechRecognizer.ERROR_RECOGNIZER_BUSY:
                     // キャンセルしてもう一度
+                    mSpeechRecognizer.stopListening();
                     mSpeechRecognizer.cancel();
+                    mSpeechRecognizer.destroy();
+                    mSpeechRecognizer = null;
                     startListener();
                     break;
                 case SpeechRecognizer.ERROR_NETWORK:
                 case SpeechRecognizer.ERROR_SERVER:
+                    startListener();
+                    break;
                 case SpeechRecognizer.ERROR_INSUFFICIENT_PERMISSIONS:
                     // 設定確認必須
                     Toast.makeText(getApplicationContext(),"ネット接続もしくはパーミッションを確認して下さい",Toast.LENGTH_SHORT).show();
                     break;
             }
-            setListeningFlag(false);
         }
 
         @Override
@@ -155,9 +145,7 @@ public class VoiceAnalysisService extends Service {
             L.d("get Recognize data = " + arrayList.get(0));
 
             sendTextData(arrayList.get(0));
-            mSpeechRecognizer.cancel();
             startListener();
-            setListeningFlag(false);
         }
 
         @Override
