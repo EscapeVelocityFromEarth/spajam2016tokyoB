@@ -5,13 +5,16 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.escapevelocityfromearth.automoderator.R;
 import com.escapevelocityfromearth.automoderator.service.VoiceAnalysisService;
+import com.escapevelocityfromearth.automoderator.util.Const;
 import com.escapevelocityfromearth.automoderator.util.MessageSender;
+import com.escapevelocityfromearth.automoderator.util.Prefs;
 
 public class MainActivity extends AppCompatActivity implements OnClickListener {
 
@@ -20,6 +23,8 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
     Button stopButton;
     Spinner userTypeSpinner;
     Button go;
+
+    String userName = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,13 +40,24 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
         stopButton.setOnClickListener(this);
 
         userTypeSpinner = (Spinner) findViewById(R.id.spinner_user_type);
+        userTypeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                userName = (String) parent.getItemAtPosition(position);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
         go = (Button) findViewById(R.id.button_next);
         go.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent;
-                if (userTypeSpinner.getSelectedItemPosition()==0) {
+                if (userTypeSpinner.getSelectedItemPosition() == 0) {
                     intent = new Intent(MainActivity.this, AdminActivity.class);
                 } else {
                     intent = new Intent(MainActivity.this, MemberActivity.class);
@@ -50,6 +66,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
             }
         });
 
+        Prefs.saveUserName(this, Const.DEFAULT_USER);
     }
 
     @Override
@@ -66,6 +83,9 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.start:
+                if(!userName.equals("")) {
+                    Prefs.saveUserName(this, userName);
+                }
                 startService();
                 break;
             case R.id.stop:

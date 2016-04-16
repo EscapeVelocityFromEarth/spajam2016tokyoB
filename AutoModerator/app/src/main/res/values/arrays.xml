@@ -3,6 +3,11 @@
 
     <string-array name="spinner_user_type_values">
         <item>ファシリテーター</item>
+        <item>kojira</item>
+        <item>kazy</item>
+        <item>shibata</item>
+        <item>mikk</item>
+        <item>kuwa</item>
         <item>参加者</item>
     </string-array>
 
