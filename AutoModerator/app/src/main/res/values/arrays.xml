@@ -2,7 +2,7 @@
 <resources>
 
     <string-array name="spinner_user_type_values">
-        <item>ファシリテーター</item>
+        <item>facilitator</item>
         <item>kojira</item>
         <item>kazy</item>
         <item>shibata</item>

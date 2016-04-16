@@ -12,6 +12,7 @@ import android.widget.Toast;
 import com.escapevelocityfromearth.automoderator.util.Const;
 import com.escapevelocityfromearth.automoderator.util.L;
 import com.escapevelocityfromearth.automoderator.util.MessageSender;
+import com.escapevelocityfromearth.automoderator.util.Prefs;
 
 import java.util.ArrayList;
 
@@ -29,8 +30,9 @@ public class VoiceAnalysisService extends Service {
 
         startListener();
         sender = new MessageSender(this);
-        sender.sendMessage(System.currentTimeMillis(), Const.CREATE_RECORD_USER, Const.CREATE_RECORD_STRAT);
-
+        if(Prefs.loadUserName(this).equals(Const.DEFAULT_USER)) {
+            sender.sendMessage(System.currentTimeMillis(), Const.CREATE_RECORD_USER, Const.CREATE_RECORD_START);
+        }
     }
 
     private void startListener() {
@@ -52,7 +54,9 @@ public class VoiceAnalysisService extends Service {
         L.outputMethodName();
         mSpeechRecognizer.cancel();
         mSpeechRecognizer.destroy();
-        sender.sendMessage(System.currentTimeMillis(), Const.CREATE_RECORD_USER, Const.CREATE_RECORD_END);
+        if(Prefs.loadUserName(this).equals(Const.DEFAULT_USER)) {
+            sender.sendMessage(System.currentTimeMillis(), Const.CREATE_RECORD_USER, Const.CREATE_RECORD_END);
+        }
     }
 
     @Override
