@@ -43,6 +43,8 @@ public class VoiceAnalysisService extends Service {
     public void onDestroy() {
         super.onDestroy();
         L.outputMethodName();
+        mSpeechRecognizer.cancel();
+        mSpeechRecognizer.destroy();
     }
 
     @Override
