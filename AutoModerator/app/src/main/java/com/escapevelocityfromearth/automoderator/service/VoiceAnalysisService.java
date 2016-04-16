@@ -9,12 +9,14 @@ import android.speech.RecognizerIntent;
 import android.speech.SpeechRecognizer;
 
 import com.escapevelocityfromearth.automoderator.util.L;
+import com.escapevelocityfromearth.automoderator.util.MessageSender;
 
 import java.util.ArrayList;
 
 public class VoiceAnalysisService extends Service {
 
     private SpeechRecognizer mSpeechRecognizer;
+    private MessageSender sender;
 
     public VoiceAnalysisService() {
     }
@@ -33,6 +35,8 @@ public class VoiceAnalysisService extends Service {
 
         intent.putExtra(RecognizerIntent.EXTRA_CALLING_PACKAGE, getPackageName());
         mSpeechRecognizer.startListening(intent);
+
+        sender = new MessageSender(this);
     }
 
     @Override
@@ -48,7 +52,7 @@ public class VoiceAnalysisService extends Service {
 
     // ここに音声認識のテキストデータが入ります。
     private void sendTextData(String sendData) {
-
+        sender.sendMessage(sendData);
     }
 
     private RecognitionListener mRecognitionListener = new RecognitionListener() {
