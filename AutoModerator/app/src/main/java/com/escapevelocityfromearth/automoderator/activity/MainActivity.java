@@ -145,6 +145,9 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
             case R.id.menu_settings:
                 startActivity(new Intent(this, SettingsActivity.class));
                 break;
+            case R.id.menu_debug_settings:
+                startActivity(new Intent(this, DebugSettingActivity.class));
+                break;
         }
         return true;
     }

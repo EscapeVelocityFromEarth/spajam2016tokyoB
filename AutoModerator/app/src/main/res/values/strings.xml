@@ -14,4 +14,5 @@
     <string name="confirm_next_meeting">次の打ち合わせ日程を確認してください</string>
     <string name="confirmed_or_no_need">確認した/必要ない</string>
     <string name="well_done">おつかれさまでした</string>
+    <string name="apply_setting">適用</string>
 </resources>

@@ -7,4 +7,9 @@
         android:title="Setting"
         app:showAsAction="never" />
 
+    <item
+        android:id="@+id/menu_debug_settings"
+        android:title="Debug Setting"
+        app:showAsAction="never" />
+
 </menu>
