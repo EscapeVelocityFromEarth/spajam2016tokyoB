@@ -17,7 +17,7 @@ public class MessageSender {
     private static final boolean DBG = Const.DBG;
     private static final String TAG = "MessageSender";
 
-    private static final String sendMessageUrl = "";   //TODO URL
+    private static final String sendMessageUrl = "http://192.168.216.74/sendMessage.php";   //TODO URL
 
     private static final String KEY_TIME = "time";
     private static final String KEY_USER = "user";
@@ -72,6 +72,7 @@ public class MessageSender {
                     URL url = new URL(sendMessageUrl);
                     connection = (HttpURLConnection) url.openConnection();
                     connection.setRequestMethod("POST");
+                    //connection.setRequestProperty("Connection", "close");
                     connection.setDoInput(true);
                     connection.setDoOutput(true);
 
@@ -84,6 +85,7 @@ public class MessageSender {
                     out.write(data.getBytes());
                     out.flush();
                     out.close();
+
 
                     int responseCode = connection.getResponseCode();
                     String result = "";
@@ -104,6 +106,7 @@ public class MessageSender {
                     }
 
                     if(DBG) Log.d(TAG, "result / " + result);
+
                 } catch (Exception e) {
                     e.printStackTrace();
                 } finally {
@@ -133,7 +136,7 @@ public class MessageSender {
         String postData =
                 KEY_TIME + "=" + timeStringFormat(time) + "&" +
                 KEY_USER + "=" + userName + "&" +
-                KEY_TEXT + "=" + text;
+                KEY_TEXT + "=" + text + "\n";
 
         if(DBG) Log.d(TAG, "send data : " + postData);
 
