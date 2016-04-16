@@ -4,4 +4,14 @@
     <string name="user_type">ユーザー種別</string>
     <string name="go">進む</string>
     <string name="start">スタート</string>
+    <string name="recording">録音中</string>
+    <string name="finish_meeting">会議を終了する</string>
+    <string name="fulfill_purpose">会議の目的は達成されましたか？</string>
+    <string name="forgot">忘れてた</string>
+    <string name="done_or_give_up">達成した/諦めた</string>
+    <string name="confirm_action_item">アクションアイテムを確認してください</string>
+    <string name="confirmed">確認した</string>
+    <string name="confirm_next_meeting">次の打ち合わせ日程を確認してください</string>
+    <string name="confirmed_or_no_need">確認した/必要ない</string>
+    <string name="well_done">おつかれさまでした</string>
 </resources>
