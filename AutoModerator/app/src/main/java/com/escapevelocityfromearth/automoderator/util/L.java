@@ -33,6 +33,7 @@ public class L {
             sb.append("code place is ");
             sb.append("(");
             sb.append(new Throwable().getStackTrace()[1].getFileName());
+            sb.append(":");
             sb.append(new Throwable().getStackTrace()[1].getLineNumber());
             sb.append(")");
 
