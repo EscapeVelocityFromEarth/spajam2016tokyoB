@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">AutoModerator</string>
+    <string name="input_name">名前を入力</string>
+    <string name="user_type">ユーザー種別</string>
+    <string name="go">進む</string>
+    <string name="start">スタート</string>
 </resources>
