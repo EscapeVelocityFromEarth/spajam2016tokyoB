@@ -61,9 +61,8 @@ public class CardDialogActivity extends AppCompatActivity {
     }
 
     public void ngGoalFragment() {
-        adapter.addFragment(new ReGoalCardFragment(), pager.getCurrentItem());
-        pager.setCurrentItem(pager.getCurrentItem() - 1);
-        adapter.removeFragment(pager.getCurrentItem() + 1);
+        adapter.addFragment(new ReGoalCardFragment());
+        pager.setCurrentItem(pager.getCurrentItem() + 1);
         //TODO ServiceにFacilitatorのメッセージを投げる
     }
 
