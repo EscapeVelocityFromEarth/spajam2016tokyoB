@@ -74,13 +74,13 @@ public class VoiceAnalysisService extends Service {
 
         private Boolean mIsListening = false;
 
-        private void setLiteningFlag(boolean isListening) {
+        private void setListeningFlag(boolean isListening) {
             synchronized (mIsListening) {
                 mIsListening = isListening;
             }
         }
 
-        private boolean getLiteningFlag() {
+        private boolean getListeningFlag() {
             synchronized (mIsListening) {
                 return mIsListening;
             }
@@ -89,7 +89,7 @@ public class VoiceAnalysisService extends Service {
         @Override
         public void onReadyForSpeech(Bundle bundle) {
             L.outputMethodName();
-            setLiteningFlag(true);
+            setListeningFlag(true);
         }
 
         @Override
@@ -117,7 +117,7 @@ public class VoiceAnalysisService extends Service {
 
         @Override
         public void onError(int i) {
-            if (!getLiteningFlag()) {
+            if (!getListeningFlag()) {
                 return;
             }
             L.outputMethodName();
@@ -144,7 +144,7 @@ public class VoiceAnalysisService extends Service {
                     Toast.makeText(getApplicationContext(),"ネット接続もしくはパーミッションを確認して下さい",Toast.LENGTH_SHORT).show();
                     break;
             }
-            setLiteningFlag(false);
+            setListeningFlag(false);
         }
 
         @Override
@@ -157,7 +157,7 @@ public class VoiceAnalysisService extends Service {
             sendTextData(arrayList.get(0));
             mSpeechRecognizer.cancel();
             startListener();
-            setLiteningFlag(false);
+            setListeningFlag(false);
         }
 
         @Override
