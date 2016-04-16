@@ -1,6 +1,9 @@
 package com.escapevelocityfromearth.automoderator.activity;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -14,10 +17,11 @@ import android.widget.TextView;
 import com.escapevelocityfromearth.automoderator.R;
 import com.escapevelocityfromearth.automoderator.service.VoiceAnalysisService;
 import com.escapevelocityfromearth.automoderator.util.Const;
-import com.escapevelocityfromearth.automoderator.util.MessageSender;
 import com.escapevelocityfromearth.automoderator.util.Prefs;
 
 public class MainActivity extends AppCompatActivity implements OnClickListener {
+
+    private final int REQUEST_PERMISSION = 1;
 
     TextView text;
     Button startButton;
@@ -32,6 +36,16 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+
+            if (!(checkSelfPermission(Manifest.permission.RECORD_AUDIO) ==
+                    PackageManager.PERMISSION_GRANTED)) {
+                requestPermissions(new String[]{Manifest.permission.RECORD_AUDIO},
+                        REQUEST_PERMISSION);
+            }
+        }
+
 
         text = (TextView) findViewById(R.id.text);
 
@@ -106,6 +120,11 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
     private void stopService() {
         Intent i = new Intent(this, VoiceAnalysisService.class);
         stopService(i);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String permssions[], int[] grentResults) {
+        super.onRequestPermissionsResult(requestCode, permssions, grentResults);
     }
 
 
