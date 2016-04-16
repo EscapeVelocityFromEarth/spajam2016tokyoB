@@ -17,7 +17,7 @@ public class MessageSender {
     private static final boolean DBG = Const.DBG;
     private static final String TAG = "MessageSender";
 
-    private static final String sendMessageUrl = "http://192.168.216.74/sendMessage.php";   //TODO URL
+    private String sendMessageUrl = "http://192.168.216.60/sendMessage.php";   //TODO URL
 
     private static final String KEY_TIME = "time";
     private static final String KEY_USER = "user";
@@ -59,6 +59,8 @@ public class MessageSender {
         //メッセージを送信する
         //final String data = makeJson(time, userName, text);
         final String data = makePostData(time, userName, text);
+
+        sendMessageUrl = Prefs.loadServerUrl(context);
 
         if (sendMessageUrl.equals("") || data.equals("")) {
             return;
