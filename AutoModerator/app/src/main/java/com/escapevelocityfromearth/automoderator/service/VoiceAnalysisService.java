@@ -41,6 +41,7 @@ public class VoiceAnalysisService extends Service {
 
     @Override
     public void onDestroy() {
+        super.onDestroy();
         L.outputMethodName();
     }
 
