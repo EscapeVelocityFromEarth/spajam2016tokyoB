@@ -8,6 +8,7 @@ import android.speech.RecognitionListener;
 import android.speech.RecognizerIntent;
 import android.speech.SpeechRecognizer;
 
+import com.escapevelocityfromearth.automoderator.util.Const;
 import com.escapevelocityfromearth.automoderator.util.L;
 import com.escapevelocityfromearth.automoderator.util.MessageSender;
 
@@ -37,6 +38,7 @@ public class VoiceAnalysisService extends Service {
         mSpeechRecognizer.startListening(intent);
 
         sender = new MessageSender(this);
+        sender.sendMessage(System.currentTimeMillis(), Const.CREATE_RECORD_USER, Const.CREATE_RECORD_STRAT);
     }
 
     @Override
@@ -45,6 +47,7 @@ public class VoiceAnalysisService extends Service {
         L.outputMethodName();
         mSpeechRecognizer.cancel();
         mSpeechRecognizer.destroy();
+        sender.sendMessage(System.currentTimeMillis(), Const.CREATE_RECORD_USER, Const.CREATE_RECORD_END);
     }
 
     @Override

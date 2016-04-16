@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">AutoModerator</string>
+    <string name="app_name">源平会議伝</string>
     <string name="input_name">名前を入力</string>
     <string name="user_type">ユーザー種別</string>
     <string name="go">進む</string>

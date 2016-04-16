@@ -10,6 +10,12 @@ public class Const {
 
     public static final String DEFAULT_USER = "non-name_user";
     public static final String CREATE_RECORD_USER = "facilitator";
-    public static final String CREATE_REORD_TEXT = "議事録";
+
+    public static final String CREATE_RECORD_STRAT = "start";
+    public static final String CREATE_RECORD_END = "end";
+
+    public static final String CREATE_RECORD_TEXT = "議事録";
+
+
 
 }

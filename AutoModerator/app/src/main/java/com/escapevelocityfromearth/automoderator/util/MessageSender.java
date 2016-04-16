@@ -134,7 +134,7 @@ public class MessageSender {
     }
 
     public void requestRecord() {
-        sendMessage(System.currentTimeMillis(), Const.CREATE_RECORD_USER, Const.CREATE_REORD_TEXT);
+        sendMessage(System.currentTimeMillis(), Const.CREATE_RECORD_USER, Const.CREATE_RECORD_TEXT);
     }
 
     private static String makePostData(long time, String userName, String text) {
