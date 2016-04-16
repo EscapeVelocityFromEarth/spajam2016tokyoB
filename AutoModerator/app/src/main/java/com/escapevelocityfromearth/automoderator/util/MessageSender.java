@@ -45,18 +45,22 @@ public class MessageSender {
 
     }
 
-    /** 情報がテキストのみの場合はデフォルトのユーザ名を使用 **/
+    /**
+     * 情報がテキストのみの場合はデフォルトのユーザ名を使用
+     **/
     public void sendMessage(String text) {
         sendMessage(System.currentTimeMillis(), Prefs.loadUserName(context), text);
     }
 
-    /** メッセージを生成してサーバに送信する **/
+    /**
+     * メッセージを生成してサーバに送信する
+     **/
     public void sendMessage(long time, String userName, String text) {
         //メッセージを送信する
         //final String data = makeJson(time, userName, text);
         final String data = makePostData(time, userName, text);
 
-        if(sendMessageUrl.equals("") || data.equals("")) {
+        if (sendMessageUrl.equals("") || data.equals("")) {
             return;
         }
 
@@ -73,6 +77,7 @@ public class MessageSender {
                     connection = (HttpURLConnection) url.openConnection();
                     connection.setRequestMethod("POST");
                     //connection.setRequestProperty("Connection", "close");
+                    connection.setRequestProperty("Accept-Encoding", "");
                     connection.setDoInput(true);
                     connection.setDoOutput(true);
 
@@ -105,7 +110,7 @@ public class MessageSender {
                         result = "Error : response code " + String.valueOf(responseCode);
                     }
 
-                    if(DBG) Log.d(TAG, "result / " + result);
+                    if (DBG) Log.d(TAG, "result / " + result);
 
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -135,19 +140,21 @@ public class MessageSender {
     private static String makePostData(long time, String userName, String text) {
         String postData =
                 KEY_TIME + "=" + timeStringFormat(time) + "&" +
-                KEY_USER + "=" + userName + "&" +
-                KEY_TEXT + "=" + text + "\n";
+                        KEY_USER + "=" + userName + "&" +
+                        KEY_TEXT + "=" + text + "\n";
 
-        if(DBG) Log.d(TAG, "send data : " + postData);
+        if (DBG) Log.d(TAG, "send data : " + postData);
 
         return postData;
 
     }
 
-    /** 送信データをJson形式に変換 **/
+    /**
+     * 送信データをJson形式に変換
+     **/
     private static String makeJson(long time, String userName, String text) {
 
-        if(time == 0 || userName.equals("") || text.equals("")) {
+        if (time == 0 || userName.equals("") || text.equals("")) {
             return "";
         }
 
@@ -157,14 +164,16 @@ public class MessageSender {
                 "\"" + KEY_TEXT + "\", \"" + text + "\", " +
                 "}";
 
-        if(DBG) Log.d(TAG, "send data : " + jsonStr);
+        if (DBG) Log.d(TAG, "send data : " + jsonStr);
 
         return jsonStr;
 
     }
 
-    /** 時間をlong型からString型に変換 **/
-    private static String timeStringFormat (long time) {
+    /**
+     * 時間をlong型からString型に変換
+     **/
+    private static String timeStringFormat(long time) {
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(time);
         return calendar.get(Calendar.YEAR) + "/" +
