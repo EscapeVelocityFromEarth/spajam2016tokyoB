@@ -115,6 +115,8 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
     private void startService() {
         Intent i = new Intent(this, VoiceAnalysisService.class);
         startService(i);
+        Intent nextIntent = new Intent(this, CardDialogActivity.class);
+        startActivity(nextIntent);
     }
 
     private void stopService() {
