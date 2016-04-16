@@ -1,8 +1,12 @@
 <?php
-$HACKATHON_CHANNEL_URL = "https://hooks.slack.com/services/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";
+$HACKATHON_CHANNEL_URL = "https://hooks.slack.com/services/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";
 $HEADERS = array(
 	'Content-type: application/json'
 	);
+
+if(isset($_POST['time'])){
+	$time = $_POST['time'];
+}
 
 if(isset($_POST['user'])){
   $user=$_POST['user'];
@@ -12,7 +16,7 @@ if(isset($_POST['text'])){
   $text=$_POST['text'];
 //  echo $text;
 }
-$sendText = $user . " : " . $text;
+$sendText = $time . " - " .$user . " : " . $text;
 $sendMessage = array(
 	'text' => $sendText
 	);
