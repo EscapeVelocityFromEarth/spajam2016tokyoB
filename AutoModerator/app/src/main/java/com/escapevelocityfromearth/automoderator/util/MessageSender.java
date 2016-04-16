@@ -74,10 +74,11 @@ public class MessageSender {
                     connection.setRequestMethod("POST");
                     connection.setDoInput(true);
                     connection.setDoOutput(true);
-                    connection.setFixedLengthStreamingMode(data.getBytes().length);
+
+                    //connection.setFixedLengthStreamingMode(data.getBytes().length);
                     //connection.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
 
-                    connection.connect();
+                    //connection.connect();
 
                     out = new DataOutputStream(connection.getOutputStream());
                     out.write(data.getBytes());
@@ -124,17 +125,21 @@ public class MessageSender {
 
     }
 
+    public void requestRecord() {
+        sendMessage(System.currentTimeMillis(), Const.CREATE_RECORD_USER, Const.CREATE_REORD_TEXT);
+    }
+
     private static String makePostData(long time, String userName, String text) {
-        String postData = KEY_TIME + "=" + timeStringFormat(time) + "&" +
-                        KEY_USER + "=" + userName + "&" +
-                        KEY_TEXT + "=" + text;
+        String postData =
+                KEY_TIME + "=" + timeStringFormat(time) + "&" +
+                KEY_USER + "=" + userName + "&" +
+                KEY_TEXT + "=" + text;
 
         if(DBG) Log.d(TAG, "send data : " + postData);
 
         return postData;
 
     }
-
 
     /** 送信データをJson形式に変換 **/
     private static String makeJson(long time, String userName, String text) {
