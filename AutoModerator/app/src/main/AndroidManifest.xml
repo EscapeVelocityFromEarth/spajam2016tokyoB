@@ -41,14 +41,13 @@
             android:screenOrientation="landscape"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
 
-        <activity android:name=".activity.SettingsActivity"></activity>
+        <activity
+            android:name=".activity.SettingsActivity"
+            android:screenOrientation="landscape"
+            ></activity>
 
         <activity android:name=".activity.DebugSettingActivity" android:screenOrientation="landscape" />
 
-        <service
-            android:name=".service.MeasureTimeService"
-            android:enabled="true"
-            android:exported="false"></service>
     </application>
 
 </manifest>

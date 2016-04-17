@@ -125,6 +125,7 @@ public class CardDialogActivity extends AppCompatActivity {
     public void addFinishFragment() {
         adapter.addFragment(new FinishCardFragment());
         pager.setCurrentItem(pager.getCurrentItem() + 1);
+        mService.sendTextData(Const.CREATE_RECORD_USER, Const.CREATE_RECORD_END);
         mService.sendTextData(Const.CREATE_RECORD_USER, Const.FINISH_TEXT);
     }
 
@@ -134,10 +135,11 @@ public class CardDialogActivity extends AppCompatActivity {
         bindService(i, connection, Context.BIND_AUTO_CREATE);
     }
 
-    private void stopService() {
+    public void stopService() {
         mService.unregisterListener(listener);
         Intent i = new Intent(this, VoiceAnalysisService.class);
-        unbindService(connection);
+//        unbindService(connection);
+        stopService(i);
     }
 
 
