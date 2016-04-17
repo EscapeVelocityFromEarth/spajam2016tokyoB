@@ -10,6 +10,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="80sp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="10dp"
             android:layout_gravity="center_horizontal"
             android:gravity="center_vertical"
             android:layout_weight="1"
@@ -21,6 +23,7 @@
             android:layout_gravity="bottom|center_horizontal"
             android:layout_width="178dp"
             android:layout_height="40dp"
+            android:layout_marginRight="10dp"
             android:background="@drawable/img07_btn01_default"
             android:layout_marginBottom="30dp" />
 
