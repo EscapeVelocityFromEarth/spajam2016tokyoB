@@ -4,6 +4,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
 
 import com.escapevelocityfromearth.automoderator.R;
 import com.escapevelocityfromearth.automoderator.fragment.CardDialogFragment;
@@ -23,6 +24,7 @@ public class CardDialogActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         setContentView(R.layout.activity_card_dialog);
 
         //CardDialogFragment dialog = new CardDialogFragment();
