@@ -2,7 +2,7 @@
     <string name="app_name">源平会議伝</string>
     <string name="input_name">名前を入力</string>
     <string name="user_type">ユーザー種別</string>
-    <string name="go">進む</string>
+    <string name="go">開始</string>
     <string name="start">スタート</string>
     <string name="recording">録音中</string>
     <string name="finish_meeting">会議を終了する</string>

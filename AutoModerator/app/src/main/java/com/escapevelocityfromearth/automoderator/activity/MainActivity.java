@@ -22,7 +22,7 @@ import com.escapevelocityfromearth.automoderator.service.VoiceAnalysisService;
 import com.escapevelocityfromearth.automoderator.util.Const;
 import com.escapevelocityfromearth.automoderator.util.Prefs;
 
-public class MainActivity extends AppCompatActivity implements OnClickListener {
+public class MainActivity extends AppCompatActivity {
 
     private final int REQUEST_PERMISSION = 1;
 
@@ -52,14 +52,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
             }
         }
 
-
         text = (TextView) findViewById(R.id.text);
-
-        startButton = (Button) findViewById(R.id.start);
-        startButton.setOnClickListener(this);
-
-        stopButton = (Button) findViewById(R.id.stop);
-        stopButton.setOnClickListener(this);
 
         userTypeSpinner = (Spinner) findViewById(R.id.spinner_user_type);
         userTypeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -78,13 +71,18 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
         go.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent;
-                if (userTypeSpinner.getSelectedItemPosition() == 0) {
-                    intent = new Intent(MainActivity.this, AdminActivity.class);
-                } else {
-                    intent = new Intent(MainActivity.this, MemberActivity.class);
+                if(!userName.equals("")) {
+                    Prefs.saveUserName(MainActivity.this, userName);
                 }
-                startActivity(intent);
+                Intent i = new Intent(MainActivity.this, VoiceAnalysisService.class);
+                startService(i);
+                if (userTypeSpinner.getSelectedItemPosition() == 0) {
+                    Intent nextIntent = new Intent(MainActivity.this, CardDialogActivity.class);
+                    startActivity(nextIntent);
+                } else {
+                    Intent nextIntent = new Intent(MainActivity.this, MemberActivity.class);
+                    startActivity(nextIntent);
+                }
             }
         });
 
@@ -99,35 +97,6 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
     @Override
     public void onPause() {
         super.onPause();
-    }
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.start:
-                if(!userName.equals("")) {
-                    Prefs.saveUserName(this, userName);
-                }
-                startService();
-                break;
-            case R.id.stop:
-                stopService();
-                break;
-            default:
-                break;
-        }
-    }
-
-    private void startService() {
-        Intent i = new Intent(this, VoiceAnalysisService.class);
-        startService(i);
-        Intent nextIntent = new Intent(this, CardDialogActivity.class);
-        startActivity(nextIntent);
-    }
-
-    private void stopService() {
-        Intent i = new Intent(this, VoiceAnalysisService.class);
-        stopService(i);
     }
 
     @Override
