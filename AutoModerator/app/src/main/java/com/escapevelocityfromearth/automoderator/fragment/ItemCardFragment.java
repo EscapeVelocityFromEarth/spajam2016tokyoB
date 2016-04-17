@@ -33,7 +33,7 @@ public class ItemCardFragment extends Fragment {
             }
         });
 
-        back = BitmapFactory.decodeResource(getActivity().getResources(), R.drawable.img10_bg);
+        back = BitmapFactory.decodeResource(getActivity().getResources(), R.mipmap.img10_bg);
         view.setBackground(new BitmapDrawable(getActivity().getResources(), back));
 
         return view;

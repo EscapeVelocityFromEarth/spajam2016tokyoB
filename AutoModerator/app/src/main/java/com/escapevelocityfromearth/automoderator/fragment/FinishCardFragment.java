@@ -34,8 +34,7 @@ public class FinishCardFragment extends Fragment {
                 ((CardDialogActivity) getActivity()).finish();
             }
         });
-
-        back = BitmapFactory.decodeResource(getActivity().getResources(), R.drawable.img12_bg);
+        back = BitmapFactory.decodeResource(getActivity().getResources(), R.mipmap.img12_bg);
         view.setBackground(new BitmapDrawable(getActivity().getResources(), back));
 
         ((CardDialogActivity) getActivity()).startSound(R.raw.genpei_se_05, true);
