@@ -110,9 +110,10 @@ public class CardDialogActivity extends AppCompatActivity {
         bindService(i, connection, Context.BIND_AUTO_CREATE);
     }
 
-    private void stopService() {
+    public void stopService() {
         Intent i = new Intent(this, VoiceAnalysisService.class);
-        unbindService(connection);
+//        unbindService(connection);
+        stopService(i);
     }
 
 

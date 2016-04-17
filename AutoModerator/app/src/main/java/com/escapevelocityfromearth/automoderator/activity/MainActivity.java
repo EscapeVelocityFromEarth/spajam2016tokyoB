@@ -27,8 +27,6 @@ public class MainActivity extends AppCompatActivity {
     private final int REQUEST_PERMISSION = 1;
 
     TextView text;
-    Button startButton;
-    Button stopButton;
     Spinner userTypeSpinner;
     Button go;
 
