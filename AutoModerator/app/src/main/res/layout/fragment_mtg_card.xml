@@ -6,11 +6,14 @@
     android:orientation="vertical" >
 
         <TextView
+            android:id="@+id/count_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="30sp"
+            android:textSize="80sp"
             android:layout_gravity="center_horizontal"
+            android:gravity="center_vertical"
             android:layout_weight="1"
+            android:textColor="@android:color/white"
             android:text="始め！"/>
 
         <Button

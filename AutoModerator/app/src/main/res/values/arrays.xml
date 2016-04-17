@@ -10,4 +10,15 @@
         <item>kuwa</item>
     </string-array>
 
+    <string-array name="spinner_select_time_values">
+        <item>@string/time_one_minute</item>
+        <item>@string/time_three_minute</item>
+        <item>@string/time_five_minute</item>
+        <item>@string/time_ten_minute</item>
+        <item>@string/time_thirty_minute</item>
+        <item>@string/time_sixty_minute</item>
+        <item>@string/time_ninety</item>
+        <item>@string/time_handled_twenty</item>
+    </string-array>
+
 </resources>
