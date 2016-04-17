@@ -4,10 +4,12 @@ import android.app.Service;
 import android.content.Intent;
 import android.os.Binder;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.IBinder;
 import android.speech.RecognitionListener;
 import android.speech.RecognizerIntent;
 import android.speech.SpeechRecognizer;
+import android.view.View;
 import android.widget.Toast;
 
 import com.escapevelocityfromearth.automoderator.util.Const;
@@ -16,11 +18,32 @@ import com.escapevelocityfromearth.automoderator.util.MessageSender;
 import com.escapevelocityfromearth.automoderator.util.Prefs;
 
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class VoiceAnalysisService extends Service {
 
     private SpeechRecognizer mSpeechRecognizer;
     private MessageSender sender;
+
+    /** カウントダウン機能 **/
+    private Timer mTimer;
+    private CountDownTask mCountDownTask;
+    private Handler mHandler = new Handler();
+
+    ArrayList<OnCountListener> listeners;
+
+    public interface OnCountListener {
+        public void onCount();
+    }
+
+    public void registerListener(OnCountListener listener) {
+        this.listeners.add(listener);
+    }
+
+    public void unregisterListener(OnCountListener listener) {
+        this.listeners.remove(listener);
+    }
 
     private final IBinder mBinder = new LocalBinder();
 
@@ -42,6 +65,13 @@ public class VoiceAnalysisService extends Service {
         if(Prefs.loadUserName(this).equals(Const.DEFAULT_USER)) {
             sender.sendMessage(System.currentTimeMillis(), Const.CREATE_RECORD_USER, Const.CREATE_RECORD_START);
         }
+
+        if (mTimer != null) {
+            mTimer.cancel();
+        }
+        startStopWatch();
+
+        listeners = new ArrayList<OnCountListener>();
     }
 
     private void startListener() {
@@ -172,4 +202,32 @@ public class VoiceAnalysisService extends Service {
 
     };
 
+
+    private class CountDownTask extends TimerTask {
+
+        @Override
+        public void run() {
+            mHandler.post(new Runnable() {
+                @Override
+                public void run() {
+                    count();
+                }
+            });
+        }
+    }
+
+    private void startStopWatch() {
+        mTimer = new Timer();
+        mCountDownTask = new CountDownTask();
+        mTimer.schedule(mCountDownTask, 1000, 1000);
+    }
+
+
+    private void count() {
+        if(listeners.size() > 0) {
+            for(OnCountListener listener : listeners) {
+                listener.onCount();
+            }
+        }
+    }
 }

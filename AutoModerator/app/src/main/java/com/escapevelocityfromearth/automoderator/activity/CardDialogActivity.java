@@ -4,6 +4,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.os.Handler;
 import android.os.IBinder;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -20,13 +21,31 @@ import com.escapevelocityfromearth.automoderator.fragment.ReGoalCardFragment;
 import com.escapevelocityfromearth.automoderator.fragment.ScheduleCardFragment;
 import com.escapevelocityfromearth.automoderator.service.VoiceAnalysisService;
 import com.escapevelocityfromearth.automoderator.util.Const;
+import com.escapevelocityfromearth.automoderator.util.Prefs;
 
 public class CardDialogActivity extends AppCompatActivity {
 
     ViewPager pager;
     CardPagerAdapter adapter;
 
+    Handler mHandler;
+    int countTime = 0;
+    MTGCardFragment mtgFragment;
+
     private VoiceAnalysisService mService;
+
+    VoiceAnalysisService.OnCountListener listener = new VoiceAnalysisService.OnCountListener() {
+        @Override
+        public void onCount() {
+            mHandler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    countTime--;
+                    setTimeText();
+                }
+            }, 0);
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +59,9 @@ public class CardDialogActivity extends AppCompatActivity {
         pager = (ViewPager) findViewById(R.id.init_view);
 
         adapter = new CardPagerAdapter(getSupportFragmentManager(), this);
-        adapter.addFragment(new MTGCardFragment());
+
+        mtgFragment = new MTGCardFragment();
+        adapter.addFragment(mtgFragment);
 
         pager.setAdapter(adapter);
 
@@ -60,6 +81,9 @@ public class CardDialogActivity extends AppCompatActivity {
                 //do nothing
             }
         });
+
+        mHandler = new Handler();
+        countTime = Prefs.loadCountTime(this) * 60;
     }
 
     @Override
@@ -111,6 +135,7 @@ public class CardDialogActivity extends AppCompatActivity {
     }
 
     public void stopService() {
+        mService.unregisterListener(listener);
         Intent i = new Intent(this, VoiceAnalysisService.class);
 //        unbindService(connection);
         stopService(i);
@@ -122,12 +147,20 @@ public class CardDialogActivity extends AppCompatActivity {
         public void onServiceConnected(ComponentName name, IBinder service) {
             VoiceAnalysisService.LocalBinder binder = (VoiceAnalysisService.LocalBinder)service;
             mService = binder.getService();
+            mService.registerListener(listener);
         }
 
         @Override
         public void onServiceDisconnected(ComponentName name) {
         }
     };
+
+
+    private void setTimeText() {
+        if(mtgFragment != null) {
+            mtgFragment.setTimeText(countTime);
+        }
+    }
 
 
 }

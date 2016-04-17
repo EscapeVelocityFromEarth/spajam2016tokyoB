@@ -30,6 +30,7 @@ public class L {
     public static void traceCodePlace(String message) {
         if (DEBUG) {
             StringBuilder sb = new StringBuilder();
+            sb.append("message is " + message + " ");
             sb.append("code place is ");
             sb.append("(");
             sb.append(new Throwable().getStackTrace()[1].getFileName());

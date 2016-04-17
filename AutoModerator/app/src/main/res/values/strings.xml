@@ -15,4 +15,16 @@
     <string name="confirmed_or_no_need">確認した/必要ない</string>
     <string name="well_done">おつかれさまでした</string>
     <string name="apply_setting">適用</string>
+    <string name="start_measurement_text">"計測開始"</string>
+    <string name="finish_measurement_text">"計測終了"</string>
+
+    <string name="time_one_minute">"1分"</string>
+    <string name="time_three_minute">"3分"</string>
+    <string name="time_five_minute">"5分"</string>
+    <string name="time_ten_minute">"10分"</string>
+    <string name="time_thirty_minute">"30分"</string>
+    <string name="time_sixty_minute">"60分"</string>
+    <string name="time_ninety">"90分"</string>
+    <string name="time_handled_twenty">"120分"</string>
+
 </resources>
