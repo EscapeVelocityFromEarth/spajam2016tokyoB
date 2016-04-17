@@ -30,12 +30,14 @@ public class ItemCardFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 ((CardDialogActivity) getActivity()).addScheduleFragment();
+                ((CardDialogActivity) getActivity()).startSound(R.raw.genpei_se_08, false);
             }
         });
 
         back = BitmapFactory.decodeResource(getActivity().getResources(), R.mipmap.img10_bg);
         view.setBackground(new BitmapDrawable(getActivity().getResources(), back));
 
+        ((CardDialogActivity) getActivity()).startSound(R.raw.genpei_voice_02, false);
         return view;
     }
 

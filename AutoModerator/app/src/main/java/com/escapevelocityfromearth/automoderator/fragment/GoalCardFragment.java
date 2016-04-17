@@ -33,6 +33,7 @@ public class GoalCardFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 ((CardDialogActivity) getActivity()).ngGoalFragment();
+                ((CardDialogActivity) getActivity()).startSound(R.raw.genpei_se_08, false);
             }
         });
 
@@ -41,6 +42,7 @@ public class GoalCardFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 ((CardDialogActivity) getActivity()).addItemFragment();
+                ((CardDialogActivity) getActivity()).startSound(R.raw.genpei_se_08, false);
             }
         });
 
@@ -48,6 +50,7 @@ public class GoalCardFragment extends Fragment {
         view.setBackground(new BitmapDrawable(getActivity().getResources(), back));
 
 
+        ((CardDialogActivity) getActivity()).startSound(R.raw.genpei_voice_21, false);
         return view;
     }
 

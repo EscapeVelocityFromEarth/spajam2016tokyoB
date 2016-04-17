@@ -1,7 +1,6 @@
 package com.escapevelocityfromearth.automoderator.activity;
 
 import android.os.Bundle;
-import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
@@ -18,6 +17,7 @@ public class DebugSettingActivity extends AppCompatActivity {
     Spinner userTypeSpinner;
     String userName = "";
 
+    private Spinner userTypeSpinnerTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +44,19 @@ public class DebugSettingActivity extends AppCompatActivity {
                 }
             }
 
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        userTypeSpinnerTime = (Spinner) findViewById(R.id.spinner_user_typeTime);
+        userTypeSpinnerTime.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                Prefs.saveCountTime(getApplicationContext(), Integer.parseInt(((String)parent.getItemAtPosition(position)).replaceAll("[^0-9]", "")));
+            }
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
 

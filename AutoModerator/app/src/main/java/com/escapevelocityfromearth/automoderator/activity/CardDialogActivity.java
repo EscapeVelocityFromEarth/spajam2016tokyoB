@@ -87,6 +87,7 @@ public class CardDialogActivity extends AppCompatActivity {
 
         mHandler = new Handler();
         countTime = Prefs.loadCountTime(this) * 60;
+
     }
 
     @Override
@@ -173,6 +174,8 @@ public class CardDialogActivity extends AppCompatActivity {
 
     public void startSound(int resId, boolean loop) {
 
+        android.util.Log.d("test", "sound:" + getResources().getResourceName(resId));
+
         if(resId == 0) {
             return;
         }
@@ -185,11 +188,10 @@ public class CardDialogActivity extends AppCompatActivity {
         }
 
         mp = MediaPlayer.create(this, resId);
-
+        mp.setLooping(loop);
         if (mp.isPlaying()) { //再生中
             mp.stop();
             try {
-                mp.setLooping(loop);
                 mp.prepare();
             } catch (Exception e) {
                 e.printStackTrace();

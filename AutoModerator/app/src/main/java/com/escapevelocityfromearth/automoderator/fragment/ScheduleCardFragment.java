@@ -30,11 +30,13 @@ public class ScheduleCardFragment extends Fragment{
             @Override
             public void onClick(View v) {
                 ((CardDialogActivity) getActivity()).addFinishFragment();
+                ((CardDialogActivity) getActivity()).startSound(R.raw.genpei_se_08, false);
             }
         });
 
         back = BitmapFactory.decodeResource(getActivity().getResources(), R.mipmap.img11_bg);
         view.setBackground(new BitmapDrawable(getActivity().getResources(), back));
+        ((CardDialogActivity) getActivity()).startSound(R.raw.genpei_voice_18, false);
 
         return view;
     }
