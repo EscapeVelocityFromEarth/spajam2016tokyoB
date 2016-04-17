@@ -119,15 +119,13 @@ public class VoiceAnalysisService extends Service {
                 case SpeechRecognizer.ERROR_AUDIO:
                 case SpeechRecognizer.ERROR_CLIENT:
                 case SpeechRecognizer.ERROR_RECOGNIZER_BUSY:
+                case SpeechRecognizer.ERROR_NETWORK:
+                case SpeechRecognizer.ERROR_SERVER:
                     // キャンセルしてもう一度
                     mSpeechRecognizer.stopListening();
                     mSpeechRecognizer.cancel();
                     mSpeechRecognizer.destroy();
                     mSpeechRecognizer = null;
-                    startListener();
-                    break;
-                case SpeechRecognizer.ERROR_NETWORK:
-                case SpeechRecognizer.ERROR_SERVER:
                     startListener();
                     break;
                 case SpeechRecognizer.ERROR_INSUFFICIENT_PERMISSIONS:
