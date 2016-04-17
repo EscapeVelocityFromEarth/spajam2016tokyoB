@@ -3,6 +3,7 @@ package com.escapevelocityfromearth.automoderator.activity;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -27,12 +28,12 @@ public class MainActivity extends AppCompatActivity {
     private final int REQUEST_PERMISSION = 1;
 
     TextView text;
-    Button startButton;
-    Button stopButton;
 
     Button menuButton;
 
     Button go;
+
+    MediaPlayer mp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +56,6 @@ public class MainActivity extends AppCompatActivity {
         text = (TextView) findViewById(R.id.text);
 
 
-
         menuButton = (Button) findViewById(R.id.setting);
         menuButton.setOnClickListener(new OnClickListener() {
             @Override
@@ -74,16 +74,14 @@ public class MainActivity extends AppCompatActivity {
                 if (Prefs.loadUserName(MainActivity.this).equals(Const.CREATE_RECORD_USER)) {
                     Intent nextIntent = new Intent(MainActivity.this, CardDialogActivity.class);
                     startActivity(nextIntent);
-                }
-
-                else
+                } else
 
                 {
                     Intent nextIntent = new Intent(MainActivity.this, MemberActivity.class);
                     startActivity(nextIntent);
                 }
-        }
-    });
+            }
+        });
 
         Prefs.saveUserName(this, Const.DEFAULT_USER);
     }
@@ -91,11 +89,17 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onResume() {
         super.onResume();
+        startSound(R.raw.genpei_music_01, true);
     }
 
     @Override
     public void onPause() {
         super.onPause();
+        if (mp != null) {
+            mp.stop();
+            mp.release();
+            mp = null;
+        }
     }
 
     @Override
@@ -125,5 +129,32 @@ public class MainActivity extends AppCompatActivity {
 
     */
 
+    public void startSound(int resId, boolean loop) {
+
+        if (resId == 0) {
+            return;
+        }
+
+        //現在はアプリのrawフォルダからの取得のみを想定
+        if (mp != null) {
+            mp.stop();
+            mp.release();
+            mp = null;
+        }
+
+        mp = MediaPlayer.create(this, resId);
+
+        if (mp.isPlaying()) { //再生中
+            mp.stop();
+            try {
+                mp.setLooping(loop);
+                mp.prepare();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else { //停止中
+            mp.start();
+        }
+    }
 
 }
