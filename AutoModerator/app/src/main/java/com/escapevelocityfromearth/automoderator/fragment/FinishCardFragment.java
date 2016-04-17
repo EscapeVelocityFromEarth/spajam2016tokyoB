@@ -30,13 +30,15 @@ public class FinishCardFragment extends Fragment {
         Button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                ((CardDialogActivity) getActivity()).startSound(R.raw.genpei_se_06, false);
                 ((CardDialogActivity) getActivity()).finish();
             }
         });
 
-
         back = BitmapFactory.decodeResource(getActivity().getResources(), R.drawable.img12_bg);
         view.setBackground(new BitmapDrawable(getActivity().getResources(), back));
+
+        ((CardDialogActivity) getActivity()).startSound(R.raw.genpei_se_05, true);
 
         return view;
     }

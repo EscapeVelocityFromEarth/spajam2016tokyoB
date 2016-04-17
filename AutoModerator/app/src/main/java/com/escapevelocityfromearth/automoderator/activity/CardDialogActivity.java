@@ -171,14 +171,13 @@ public class CardDialogActivity extends AppCompatActivity {
         }
     }
 
-    public void startSound(String fileName, boolean loop) {
+    public void startSound(int resId, boolean loop) {
 
-        if(fileName == null || fileName.equals("")) {
+        if(resId == 0) {
             return;
         }
 
         //現在はアプリのrawフォルダからの取得のみを想定
-        int resId = getResources().getIdentifier(fileName, "raw", getPackageName());
         if(mp != null) {
             mp.stop();
             mp.release();
