@@ -12,7 +12,7 @@
             android:layout_gravity="bottom|center_horizontal"
             android:layout_width="178dp"
             android:layout_height="40dp"
-            android:background="@drawable/img09_btn01_default"
+            android:background="@mipmap/img09_btn01_default"
             android:layout_marginBottom="30dp" />
 
 </LinearLayout>

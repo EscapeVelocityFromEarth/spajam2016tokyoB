@@ -35,7 +35,7 @@ public class FinishCardFragment extends Fragment {
         });
 
 
-        back = BitmapFactory.decodeResource(getActivity().getResources(), R.drawable.img12_bg);
+        back = BitmapFactory.decodeResource(getActivity().getResources(), R.mipmap.img12_bg);
         view.setBackground(new BitmapDrawable(getActivity().getResources(), back));
 
         return view;

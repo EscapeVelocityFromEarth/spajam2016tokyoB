@@ -47,7 +47,7 @@ public class MTGCardFragment extends Fragment {
         });
         button.setVisibility(View.GONE);
 
-        back = BitmapFactory.decodeResource(getActivity().getResources(), R.drawable.img04_bg);
+        back = BitmapFactory.decodeResource(getActivity().getResources(), R.mipmap.img04_bg);
         view.setBackground(new BitmapDrawable(getActivity().getResources(), back));
 
         mHandler = new Handler();
@@ -65,7 +65,7 @@ public class MTGCardFragment extends Fragment {
     Runnable bgTask = new Runnable() {
         @Override
         public void run() {
-            back2 = BitmapFactory.decodeResource(getActivity().getResources(), R.drawable.img05_bg);
+            back2 = BitmapFactory.decodeResource(getActivity().getResources(), R.mipmap.img05_bg);
             back.recycle();
             back = null;
             view.setBackground(new BitmapDrawable(getActivity().getResources(), back2));
@@ -76,7 +76,7 @@ public class MTGCardFragment extends Fragment {
     Runnable bgTask2 = new Runnable() {
         @Override
         public void run() {
-            back3 = BitmapFactory.decodeResource(getActivity().getResources(), R.drawable.img06_bg);
+            back3 = BitmapFactory.decodeResource(getActivity().getResources(), R.mipmap.img06_bg);
             view.setBackground(new BitmapDrawable(getActivity().getResources(), back3));
             back2.recycle();
             back2 = null;
@@ -87,7 +87,7 @@ public class MTGCardFragment extends Fragment {
     Runnable bgTask3 = new Runnable() {
         @Override
         public void run() {
-            back4 = BitmapFactory.decodeResource(getActivity().getResources(), R.drawable.img07_bg);
+            back4 = BitmapFactory.decodeResource(getActivity().getResources(), R.mipmap.img07_bg);
             view.setBackground(new BitmapDrawable(getActivity().getResources(), back4));
             back3.recycle();
             back3 = null;
@@ -105,7 +105,7 @@ public class MTGCardFragment extends Fragment {
         }
         if (countTime == 0) {
             mTextView.setVisibility(View.INVISIBLE);
-            back5 = BitmapFactory.decodeResource(getActivity().getResources(), R.drawable.img072_bg);
+            back5 = BitmapFactory.decodeResource(getActivity().getResources(), R.mipmap.img072_bg);
             view.setBackground(new BitmapDrawable(getActivity().getResources(), back5));
             back4.recycle();
             back4 = null;
