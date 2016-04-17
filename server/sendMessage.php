@@ -1,5 +1,5 @@
 <?php
-header("Content-type :text/plain;charset=UTF-8");
+//header("Content-type :text/plain;charset=UTF-8");
 $SLACK_API_KEY = "xoxp-32785354118-33393129105-35334114071-8896b60a4a";
 $SLACK_UPLOAD_URL = "https://slack.com/api/files.upload";
 $UPLOAD_CHANNEL = "#webhook";
@@ -15,17 +15,18 @@ $HEADERS = array(
 	);
 
 if(isset($_POST['time'])){
-	$time = $_POST['time'];
+	$time = trim($_POST['time']);
 }
 
 if(isset($_POST['user'])){
-  $user=$_POST['user'];
+  $user = trim($_POST['user']);
 //  echo $user;
 }
 if(isset($_POST['text'])){
-  $text=$_POST['text'];
+  $text = trim($_POST['text']);
 //  echo $text;
 }
+error_log("user=" . $user . " text=" . $text . "\n");
 
 $sendText = $time . " - " .$user . " : " . $text;
 
