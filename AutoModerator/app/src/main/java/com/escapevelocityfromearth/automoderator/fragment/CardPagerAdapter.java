@@ -1,6 +1,7 @@
 package com.escapevelocityfromearth.automoderator.fragment;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;

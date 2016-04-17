@@ -3,24 +3,16 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:gravity="bottom"
     android:orientation="vertical" >
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="30sp"
-            android:layout_gravity="center_horizontal"
-            android:layout_weight="1"
-            android:text="アクションアイテムを確認しろ"/>
 
         <Button
             android:id="@+id/check_item"
             android:layout_gravity="bottom|center_horizontal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="20sp"
-            android:text="確認した（仮）"
-            android:layout_marginBottom="20dp"
-            android:textSize="24sp" />
+            android:layout_width="178dp"
+            android:layout_height="40dp"
+            android:background="@drawable/img10_btn01_default"
+            android:layout_marginBottom="30dp" />
 
 </LinearLayout>

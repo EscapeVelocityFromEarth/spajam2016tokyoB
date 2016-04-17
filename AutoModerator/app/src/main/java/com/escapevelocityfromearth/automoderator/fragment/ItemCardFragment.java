@@ -1,5 +1,8 @@
 package com.escapevelocityfromearth.automoderator.fragment;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -16,6 +19,7 @@ import com.escapevelocityfromearth.automoderator.activity.CardDialogActivity;
 public class ItemCardFragment extends Fragment {
 
     Button button;
+    Bitmap back;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -29,6 +33,17 @@ public class ItemCardFragment extends Fragment {
             }
         });
 
+        back = BitmapFactory.decodeResource(getActivity().getResources(), R.drawable.img10_bg);
+        view.setBackground(new BitmapDrawable(getActivity().getResources(), back));
+
         return view;
     }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        back.recycle();
+        back = null;
+    }
+
 }

@@ -1,5 +1,6 @@
 package com.escapevelocityfromearth.automoderator.activity;
 
+import android.graphics.drawable.BitmapDrawable;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;

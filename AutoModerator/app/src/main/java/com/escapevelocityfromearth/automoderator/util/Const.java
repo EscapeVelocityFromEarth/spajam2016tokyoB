@@ -17,6 +17,11 @@ public class Const {
     public static final String CREATE_RECORD_END = "end";
 
     public static final String CREATE_RECORD_TEXT = "議事録";
+    public static final String CHECK_GOAL_TEXT = "話し終わっただと？\n会議の目的、忘れたわけではあるまいな？";
+    public static final String CHECK_REGOAL_TEXT = "会議の目的を確認しろっ！";
+    public static final String CHECK_ITEM_TEXT = "アクションアイテムを確認しろ";
+    public static final String CHECK_SCHEDULE_TEXT = "次の打ち合わせ日程を確認しろ";
+    public static final String FINISH_TEXT = "議事録を発行した。\nクライアント殿の加護のあらんことを。";
 
 
 
