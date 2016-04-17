@@ -3,11 +3,11 @@
 
     <string-array name="spinner_user_type_values">
         <item>facilitator</item>
-        <item>kojira</item>
-        <item>kazy</item>
-        <item>shibata</item>
-        <item>mikk</item>
-        <item>kuwa</item>
+        <item>近藤</item>
+        <item>梶井</item>
+        <item>柴田</item>
+        <item>三竹</item>
+        <item>桑原</item>
     </string-array>
 
     <string-array name="spinner_select_time_values">
