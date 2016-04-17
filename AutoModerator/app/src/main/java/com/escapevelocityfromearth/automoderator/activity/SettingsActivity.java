@@ -16,6 +16,7 @@ import android.widget.TextView;
 import com.escapevelocityfromearth.automoderator.R;
 import com.escapevelocityfromearth.automoderator.service.MeasureTimeService;
 import com.escapevelocityfromearth.automoderator.util.L;
+import com.escapevelocityfromearth.automoderator.util.Prefs;
 
 public class SettingsActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -49,6 +50,7 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 mUserSelectMinutes = Integer.parseInt(((String)parent.getItemAtPosition(position)).replaceAll("[^0-9]", ""));
                 L.d("mUserSelectMinutes = " + mUserSelectMinutes);
+                Prefs.saveCountTime(SettingsActivity.this, mUserSelectMinutes);
             }
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
@@ -80,11 +82,11 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
     private void startMeasureTime() {
         L.outputMethodName();
         registReceiver();
-        Intent intent = new Intent(getApplicationContext(), MeasureTimeService.class);
-        startService(intent);
-        mTimeLimitSecond = mUserSelectMinutes * 60;
-        setTimeText();
-    }
+    Intent intent = new Intent(getApplicationContext(), MeasureTimeService.class);
+    startService(intent);
+    mTimeLimitSecond = mUserSelectMinutes * 60;
+    setTimeText();
+}
 
     private void stopMeasureTime() {
         L.outputMethodName();

@@ -36,4 +36,19 @@ public class Prefs {
         SharedPreferences pref = context.getSharedPreferences(PREFS_KEY, Activity.MODE_PRIVATE);
         return pref.getString(KEY_SERVER_URL, Const.DEFAULT_URL);
     }
+
+    private static final String KEY_COUNT_TIME = "count";
+
+    public static boolean saveCountTime(Context context, int time) {
+        SharedPreferences pref = context.getSharedPreferences(PREFS_KEY, Activity.MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref.edit();
+        editor.putInt(KEY_COUNT_TIME, time);
+        return editor.commit();
+    }
+
+    public static int loadCountTime(Context context) {
+        SharedPreferences pref = context.getSharedPreferences(PREFS_KEY, Activity.MODE_PRIVATE);
+        return pref.getInt(KEY_COUNT_TIME, 60);
+    }
+
 }
