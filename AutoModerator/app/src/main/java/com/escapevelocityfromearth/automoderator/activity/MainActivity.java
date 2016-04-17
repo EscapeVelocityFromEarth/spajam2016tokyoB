@@ -29,10 +29,10 @@ public class MainActivity extends AppCompatActivity {
     TextView text;
     Button startButton;
     Button stopButton;
-    Spinner userTypeSpinner;
-    Button go;
 
-    String userName = "";
+    Button menuButton;
+
+    Button go;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,8 +40,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        //setSupportActionBar(toolbar);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
 
@@ -54,16 +54,13 @@ public class MainActivity extends AppCompatActivity {
 
         text = (TextView) findViewById(R.id.text);
 
-        userTypeSpinner = (Spinner) findViewById(R.id.spinner_user_type);
-        userTypeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                userName = (String) parent.getItemAtPosition(position);
-            }
 
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
 
+        menuButton = (Button) findViewById(R.id.setting);
+        menuButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, DebugSettingActivity.class));
             }
         });
 
@@ -71,20 +68,22 @@ public class MainActivity extends AppCompatActivity {
         go.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!userName.equals("")) {
-                    Prefs.saveUserName(MainActivity.this, userName);
-                }
                 Intent i = new Intent(MainActivity.this, VoiceAnalysisService.class);
                 startService(i);
-                if (userTypeSpinner.getSelectedItemPosition() == 0) {
+                //if (userTypeSpinner.getSelectedItemPosition() == 0) {
+                if (Prefs.loadUserName(MainActivity.this).equals(Const.CREATE_RECORD_USER)) {
                     Intent nextIntent = new Intent(MainActivity.this, CardDialogActivity.class);
                     startActivity(nextIntent);
-                } else {
+                }
+
+                else
+
+                {
                     Intent nextIntent = new Intent(MainActivity.this, MemberActivity.class);
                     startActivity(nextIntent);
                 }
-            }
-        });
+        }
+    });
 
         Prefs.saveUserName(this, Const.DEFAULT_USER);
     }
@@ -104,6 +103,7 @@ public class MainActivity extends AppCompatActivity {
         super.onRequestPermissionsResult(requestCode, permssions, grentResults);
     }
 
+    /*
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main, menu);
@@ -122,6 +122,8 @@ public class MainActivity extends AppCompatActivity {
         }
         return true;
     }
+
+    */
 
 
 }

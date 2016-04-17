@@ -29,6 +29,7 @@ public class MTGCardFragment extends Fragment {
     Bitmap back2;
     Bitmap back3;
     Bitmap back4;
+    Bitmap back5;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -97,12 +98,17 @@ public class MTGCardFragment extends Fragment {
 
 
     public void setTimeText(int countTime) {
-        if(countTime > 0) {
+        if(countTime >= 0) {
             int minute = countTime / 60;
             int second = countTime % 60;
             mTextView.setText(String.format("%02d:%02d", minute, second));
-        } else if (countTime == 0) {
-
+        }
+        if (countTime == 0) {
+            mTextView.setVisibility(View.INVISIBLE);
+            back5 = BitmapFactory.decodeResource(getActivity().getResources(), R.drawable.img072_bg);
+            view.setBackground(new BitmapDrawable(getActivity().getResources(), back5));
+            back4.recycle();
+            back4 = null;
         }
     }
 }

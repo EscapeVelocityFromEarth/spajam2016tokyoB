@@ -4,14 +4,20 @@ import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 
 import com.escapevelocityfromearth.automoderator.R;
 import com.escapevelocityfromearth.automoderator.util.Prefs;
 
 public class DebugSettingActivity extends AppCompatActivity {
     private static final String DIALOG_TAG_1 = "dialog_tag1";
+
+    Spinner userTypeSpinner;
+    String userName = "";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +31,22 @@ public class DebugSettingActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Prefs.saveServerUrl(DebugSettingActivity.this, url.getText().toString());
+            }
+        });
+
+        userTypeSpinner = (Spinner) findViewById(R.id.spinner_user_type);
+        userTypeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                userName = (String) parent.getItemAtPosition(position);
+                if (!userName.equals("")) {
+                    Prefs.saveUserName(DebugSettingActivity.this, userName);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
             }
         });
     }
