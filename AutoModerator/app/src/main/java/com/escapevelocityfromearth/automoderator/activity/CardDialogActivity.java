@@ -4,6 +4,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.media.MediaPlayer;
 import android.os.Handler;
 import android.os.IBinder;
 import android.support.v4.view.ViewPager;
@@ -27,6 +28,8 @@ public class CardDialogActivity extends AppCompatActivity {
 
     ViewPager pager;
     CardPagerAdapter adapter;
+
+    MediaPlayer mp;
 
     Handler mHandler;
     int countTime = 0;
@@ -96,6 +99,11 @@ public class CardDialogActivity extends AppCompatActivity {
     public void onDestroy() {
         super.onDestroy();
         stopService();
+        if(mp != null) {
+            mp.stop();
+            mp.release();
+            mp = null;
+        }
     }
 
     public void addGoalFragment() {
@@ -160,6 +168,34 @@ public class CardDialogActivity extends AppCompatActivity {
     private void setTimeText() {
         if(mtgFragment != null) {
             mtgFragment.setTimeText(countTime);
+        }
+    }
+
+    public void startSound(String fileName) {
+
+        if(fileName == null || fileName.equals("")) {
+            return;
+        }
+
+        //現在はアプリのrawフォルダからの取得のみを想定
+        int resId = getResources().getIdentifier(fileName, "raw", getPackageName());
+        if(mp != null) {
+            mp.stop();
+            mp.release();
+            mp = null;
+        }
+
+        mp = MediaPlayer.create(this, resId);
+
+        if (mp.isPlaying()) { //再生中
+            mp.stop();
+            try {
+                mp.prepare();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else { //停止中
+            mp.start();
         }
     }
 
