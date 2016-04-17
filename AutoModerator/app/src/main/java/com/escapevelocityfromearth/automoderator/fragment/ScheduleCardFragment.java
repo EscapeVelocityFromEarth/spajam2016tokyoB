@@ -25,8 +25,6 @@ public class ScheduleCardFragment extends Fragment{
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_schedule_card, container, false);
 
-        ((CardDialogActivity) getActivity()).stopService();
-
         button = (Button) view.findViewById(R.id.check_schedule);
         button.setOnClickListener(new View.OnClickListener() {
             @Override

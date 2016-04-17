@@ -125,6 +125,7 @@ public class CardDialogActivity extends AppCompatActivity {
     public void addFinishFragment() {
         adapter.addFragment(new FinishCardFragment());
         pager.setCurrentItem(pager.getCurrentItem() + 1);
+        mService.sendTextData(Const.CREATE_RECORD_USER, Const.CREATE_RECORD_END);
         mService.sendTextData(Const.CREATE_RECORD_USER, Const.FINISH_TEXT);
     }
 

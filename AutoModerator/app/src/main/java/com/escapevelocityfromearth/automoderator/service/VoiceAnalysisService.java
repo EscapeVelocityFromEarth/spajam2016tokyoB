@@ -94,9 +94,9 @@ public class VoiceAnalysisService extends Service {
         L.outputMethodName();
         mSpeechRecognizer.cancel();
         mSpeechRecognizer.destroy();
-        if(Prefs.loadUserName(this).equals(Const.DEFAULT_USER)) {
-            sender.sendMessage(System.currentTimeMillis(), Const.CREATE_RECORD_USER, Const.CREATE_RECORD_END);
-        }
+//        if(Prefs.loadUserName(this).equals(Const.DEFAULT_USER)) {
+//            sender.sendMessage(System.currentTimeMillis(), Const.CREATE_RECORD_USER, Const.CREATE_RECORD_END);
+//        }
     }
 
     @Override
