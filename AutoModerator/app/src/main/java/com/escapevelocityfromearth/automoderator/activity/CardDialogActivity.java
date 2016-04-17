@@ -171,7 +171,7 @@ public class CardDialogActivity extends AppCompatActivity {
         }
     }
 
-    public void startSound(String fileName) {
+    public void startSound(String fileName, boolean loop) {
 
         if(fileName == null || fileName.equals("")) {
             return;
@@ -190,6 +190,7 @@ public class CardDialogActivity extends AppCompatActivity {
         if (mp.isPlaying()) { //再生中
             mp.stop();
             try {
+                mp.setLooping(loop);
                 mp.prepare();
             } catch (Exception e) {
                 e.printStackTrace();
