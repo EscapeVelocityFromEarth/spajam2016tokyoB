@@ -43,6 +43,8 @@ public class MTGCardFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 ((CardDialogActivity) getActivity()).addGoalFragment();
+
+                ((CardDialogActivity) getActivity()).startSound(R.raw.genpei_se_06, false);
             }
         });
         button.setVisibility(View.GONE);
@@ -52,6 +54,8 @@ public class MTGCardFragment extends Fragment {
 
         mHandler = new Handler();
         mHandler.postDelayed(bgTask, 1500);
+
+        ((CardDialogActivity) getActivity()).startSound(R.raw.genpei_music_02, false);
 
         return view;
     }
@@ -69,6 +73,7 @@ public class MTGCardFragment extends Fragment {
             back.recycle();
             back = null;
             view.setBackground(new BitmapDrawable(getActivity().getResources(), back2));
+            ((CardDialogActivity) getActivity()).startSound(R.raw.genpei_music_02, false);
             mHandler.postDelayed(bgTask2, 1500);
         }
     };
@@ -80,6 +85,7 @@ public class MTGCardFragment extends Fragment {
             view.setBackground(new BitmapDrawable(getActivity().getResources(), back3));
             back2.recycle();
             back2 = null;
+            ((CardDialogActivity) getActivity()).startSound(R.raw.genpei_music_02, false);
             mHandler.postDelayed(bgTask3, 1500);
         }
     };
@@ -102,13 +108,18 @@ public class MTGCardFragment extends Fragment {
             int minute = countTime / 60;
             int second = countTime % 60;
             mTextView.setText(String.format("%02d:%02d", minute, second));
+            if(minute == 0 && second == 30) {
+                ((CardDialogActivity) getActivity()).startSound(R.raw.genpei_music_03, false);
+            }
         }
+
         if (countTime == 0) {
             mTextView.setVisibility(View.INVISIBLE);
             back5 = BitmapFactory.decodeResource(getActivity().getResources(), R.mipmap.img072_bg);
             view.setBackground(new BitmapDrawable(getActivity().getResources(), back5));
             back4.recycle();
             back4 = null;
+            ((CardDialogActivity) getActivity()).startSound(R.raw.genpei_music_04, false);
         }
     }
 }

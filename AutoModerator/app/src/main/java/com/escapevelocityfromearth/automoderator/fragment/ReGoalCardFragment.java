@@ -30,12 +30,15 @@ public class ReGoalCardFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 ((CardDialogActivity) getActivity()).addItemFragment();
+                ((CardDialogActivity) getActivity()).startSound(R.raw.genpei_se_08, false);
             }
         });
 
         back = BitmapFactory.decodeResource(getActivity().getResources(), R.mipmap.img09_bg);
         view.setBackground(new BitmapDrawable(getActivity().getResources(), back));
 
+
+        ((CardDialogActivity) getActivity()).startSound(R.raw.genpei_voice_22, false);
         return view;
     }
 
