@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
         go.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!userName.equals("")) {
+                if (!userName.equals("")) {
                     Prefs.saveUserName(MainActivity.this, userName);
                 }
                 Intent i = new Intent(MainActivity.this, VoiceAnalysisService.class);
