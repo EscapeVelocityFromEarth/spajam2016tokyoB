@@ -2,6 +2,7 @@ package com.escapevelocityfromearth.automoderator.service;
 
 import android.app.Service;
 import android.content.Intent;
+import android.os.Binder;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.speech.RecognitionListener;
@@ -20,6 +21,14 @@ public class VoiceAnalysisService extends Service {
 
     private SpeechRecognizer mSpeechRecognizer;
     private MessageSender sender;
+
+    private final IBinder mBinder = new LocalBinder();
+
+    public class LocalBinder extends Binder {
+        public VoiceAnalysisService getService() {
+            return VoiceAnalysisService.this;
+        }
+    }
 
     public VoiceAnalysisService() {
     }
@@ -62,13 +71,16 @@ public class VoiceAnalysisService extends Service {
 
     @Override
     public IBinder onBind(Intent intent) {
-        // TODO: Return the communication channel to the service.
-        throw new UnsupportedOperationException("Not yet implemented");
+        return mBinder;
     }
 
     // ここに音声認識のテキストデータが入ります。
-    private void sendTextData(String sendData) {
+    public void sendTextData(String sendData) {
         sender.sendMessage(sendData);
+    }
+
+    public void sendTextData(String user, String data) {
+        sender.sendMessage(System.currentTimeMillis(), user, data);
     }
 
     private RecognitionListener mRecognitionListener = new RecognitionListener() {

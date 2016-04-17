@@ -110,24 +110,14 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
                 }
                 startService();
                 break;
-            case R.id.stop:
-                stopService();
-                break;
             default:
                 break;
         }
     }
 
     private void startService() {
-        Intent i = new Intent(this, VoiceAnalysisService.class);
-        startService(i);
         Intent nextIntent = new Intent(this, CardDialogActivity.class);
         startActivity(nextIntent);
-    }
-
-    private void stopService() {
-        Intent i = new Intent(this, VoiceAnalysisService.class);
-        stopService(i);
     }
 
     @Override
