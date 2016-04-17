@@ -44,7 +44,7 @@ public class GoalCardFragment extends Fragment {
             }
         });
 
-        back = BitmapFactory.decodeResource(getActivity().getResources(), R.drawable.img08_bg);
+        back = BitmapFactory.decodeResource(getActivity().getResources(), R.mipmap.img08_bg);
         view.setBackground(new BitmapDrawable(getActivity().getResources(), back));
 
 

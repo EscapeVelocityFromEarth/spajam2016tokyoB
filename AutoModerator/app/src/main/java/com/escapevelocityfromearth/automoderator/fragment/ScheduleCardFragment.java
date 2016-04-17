@@ -33,7 +33,7 @@ public class ScheduleCardFragment extends Fragment{
             }
         });
 
-        back = BitmapFactory.decodeResource(getActivity().getResources(), R.drawable.img11_bg);
+        back = BitmapFactory.decodeResource(getActivity().getResources(), R.mipmap.img11_bg);
         view.setBackground(new BitmapDrawable(getActivity().getResources(), back));
 
         return view;
